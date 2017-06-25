@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  titulo: MyString
+  dificultad: MyString
+  tiempo: MyString
+  ingredientes: MyString
+  implemento: MyString
+  glosa: MyString
+
+two:
+  titulo: MyString
+  dificultad: MyString
+  tiempo: MyString
+  ingredientes: MyString
+  implemento: MyString
+  glosa: MyString

@@ -1,0 +1,21 @@
+<%= form_for(@high) do |f| %>
+  <% if @high.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@high.errors.count, "error") %> prohibited this high from being saved:</h2>
+
+      <ul>
+      <% @high.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :score %><br>
+    <%= f.text_field :score %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,46 @@
+<%- model_class = Recipe -%>
+<div class="page-header">
+  <h1>Recetas</h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <!--<th><%= model_class.human_attribute_name(:id) %></th> -->
+      <th><%= model_class.human_attribute_name(:titulo) %></th>
+      <!--<th><%= model_class.human_attribute_name(:dificultad) %></th> -->
+      <!--<th><%= model_class.human_attribute_name(:tiempo) %></th> -->
+      <!--<th><%= model_class.human_attribute_name(:ingredientes) %></th> -->
+      <!--<th><%= model_class.human_attribute_name(:implemento) %></th> -->
+      <!--<th><%= model_class.human_attribute_name(:glosa) %></th> -->
+      <th><%= model_class.human_attribute_name(:fecha) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @recipes.each do |recipe| %>
+      <tr>
+        <!--<td><%= link_to recipe.id, recipe_path(recipe) %></td>-->
+        <!--<td><%= recipe.titulo %></td> -->
+        <!--<td><%= recipe.dificultad %></td> -->
+        <!--<td><%= recipe.tiempo %></td> -->
+        <!--<td><%= recipe.ingredientes %></td> -->
+        <!--<td><%= recipe.implemento %></td> -->
+        <!--<td><%= recipe.glosa %></td> -->
+        <td><%= link_to recipe.titulo, recipe_path(recipe)%></td>
+        <td><%=l recipe.created_at %></td> 
+        <td>
+          <% if user_signed_in? && current_user.is_moderador? %>
+            <%= link_to t('.Editar', :default => t("helpers.links.editar")),
+                        edit_recipe_path(recipe), :class => 'btn btn-default btn-xs' %>
+                     
+           <%if recipe.may_publish? %>
+            <%= link_to t('.Publicar', :default => t("helpers.links.publicar")),
+                        "/recipes/#{recipe.id}/publish", :class => 'btn btn-default btn-xs', method: :put %>
+          <%end%>
+          <%end%> 
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

@@ -1,0 +1,71 @@
+<%= form_for @recipe, :html => { :class => "form-horizontal recipe" } do |f| %>
+
+  <% if @recipe.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @recipe.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :titulo, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :titulo, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:titulo) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :dificultad, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :dificultad, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:dificultad) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :tiempo, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :tiempo, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:tiempo) %>
+  </div>
+  <div class="field">
+    <label> ingredientes </label>
+    <% @ingredientes.each do |ingrediente| %>
+    <div class="field">
+      <%= check_box_tag "Ingredientes[]", ingrediente.id %> <%= ingrediente.ing_nombre %>
+    </div>
+    <% end %>
+  </div>
+  <div class="field">
+    <label> implementos </label>
+    <% @implementos.each do |implemento| %>
+    <div class="field">
+      <%= check_box_tag "Implementos[]", implemento.id %> <%= implemento.imp_nombre %>
+    </div>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :glosa, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :glosa, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:glosa) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                recipes_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

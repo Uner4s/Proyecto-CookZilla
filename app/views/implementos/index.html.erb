@@ -1,0 +1,36 @@
+<%- model_class = Implemento -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:imp_nombre) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @implementos.each do |implemento| %>
+      <tr>
+        <td><%= link_to implemento.id, implemento_path(implemento) %></td>
+        <td><%= implemento.imp_nombre %></td>
+        <td><%=l implemento.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.editar")),
+                      edit_implemento_path(implemento), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.eliminar")),
+                      implemento_path(implemento),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirmacion", :default => '¿Esta seguro que desea eliminar el implemento?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.Añadir implemento")),
+            new_implemento_path,
+            :class => 'btn btn-primary' %>

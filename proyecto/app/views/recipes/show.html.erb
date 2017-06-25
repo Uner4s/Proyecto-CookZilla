@@ -1,0 +1,41 @@
+<%- model_class = Recipe -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:titulo) %>:</strong></dt>
+  <dd><%= @recipe.titulo %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:dificultad) %>:</strong></dt>
+  <dd><%= @recipe.dificultad %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:tiempo) %>:</strong></dt>
+  <dd><%= @recipe.tiempo %></dd>
+  <!--Mostrar ingredientes-->
+  <div class="field">
+    <dt>Ingredientes</dt>
+    <br>
+    <% @recipe.ingredientes.each do |ingrediente| %>
+        <%=ingrediente.ing_nombre %><br>
+    <%end%>
+  </div>
+ <!--Mostrar implementos-->
+ <div class="field">
+    <dt>Implementos</dt>
+    <br>
+    <% @recipe.implementos.each do |implemento| %>
+        <%=implemento.imp_nombre%><br>
+    <%end%>
+  
+  <dt><strong><%= model_class.human_attribute_name(:glosa) %>:</strong></dt>
+  <dd><%= @recipe.glosa %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.atras")),
+              recipes_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.editar")),
+              edit_recipe_path(@recipe), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.eliminar")),
+              recipe_path(@recipe),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirmacion", :default => '¿Esta seguro que desea eliminar la receta?')) },
+              :class => 'btn btn-danger' %>

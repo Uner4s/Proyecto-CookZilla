@@ -1,0 +1,36 @@
+<%- model_class = Ingrediente -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:ing_nombre) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ingredientes.each do |ingrediente| %>
+      <tr>
+        <td><%= link_to ingrediente.id, ingrediente_path(ingrediente) %></td>
+        <td><%= ingrediente.ing_nombre %></td>
+        <td><%=l ingrediente.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.editar")),
+                      edit_ingrediente_path(ingrediente), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.eliminar")),
+                      ingrediente_path(ingrediente),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirmacion", :default => '¿Esta seguro que desea eliminar el ingrediente?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.Añadir ingrediente")),
+            new_ingrediente_path,
+            :class => 'btn btn-primary' %>

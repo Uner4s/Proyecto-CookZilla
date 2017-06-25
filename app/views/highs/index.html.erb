@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Highs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Score</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @highs.each do |high| %>
+      <tr>
+        <td><%= high.score %></td>
+        <td><%= link_to 'Show', high %></td>
+        <td><%= link_to 'Edit', edit_high_path(high) %></td>
+        <td><%= link_to 'Destroy', high, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New High', new_high_path %>

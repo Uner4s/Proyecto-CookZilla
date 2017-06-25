@@ -1,0 +1,23 @@
+<h1>SearchRecipe#search_form</h1>
+<p>Find me in app/views/search_recipe/search_form.html.erb</p>
+
+<%= form_tag search_recipe_index_path, method: :get do%>
+    <label>Ingredientes:</label>
+    <% @ingredientes.each do |ingrediente| %>
+    <div class="field">
+        <%= check_box_tag "ingredientes[]", ingrediente.id %> <%= ingrediente.ing_nombre %>
+    </div>
+    <%end%>
+    
+    <label>Implementos:</label>
+    <% @implementos.each do |implemento| %>
+    <div class="field">
+        <%= check_box_tag "implementos[]", implemento.id %> <%= implemento.imp_nombre %>
+    </div>
+    <%end%>
+    
+    <%= submit_tag "Buscar ;_; PLS", name: nil, class: "btn btn-primary btn-md" %>
+<%end%>
+
+
+
